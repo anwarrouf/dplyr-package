@@ -46,6 +46,17 @@ flights |>
 # To remove duplicate rows containing specific values, distinct() is used
 flights |>
   distinct()
-
+# In case to use two variables such as finding all unique origin and destination pairs
 flights |>
   distinct(origin,dest)
+# if we want to keep the other columns when filtering for unique rows, then
+
+flights |>
+  distinct(origin,dest,.keep_all = T)
+
+flights |>
+  filter(arr_delay >= 120 & dep_delay == 0) |>
+  filter(dest == "IAH" | dest == "HOU") |>
+  filter(carrier == "UA" | carrier == "AA" | carrier == "DL" ) |>
+  filter(month == 7 | month == 8 | month ==9)
+  
