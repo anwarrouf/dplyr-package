@@ -7,6 +7,10 @@ nycflights13::flights
 # they are designed for large datasets, so they only show the first few rows and only the columns that fit on one screen.
 
 library(dplyr)
+
+# To view whole table, we need to use View() function
+
+View(flights)
 glimpse(flights)
 
 # <int> is short for integer
@@ -33,15 +37,27 @@ flights |>
    filter (year == 2013 & month == 2)
 
 # Use of arrange()
-flights |>
+arraged_flights = flights |>
   arrange(year,month,day,dep_time)
 # In the above arrange () function, we set four column conditions
 # If you provide more than one column name, each additional column will be used to break ties in the values of the preceding columns.
 # For example, the following code sorts by the departure time, which is spread over four columns.
 # We get the earliest years first, then within a year, the earliest months, etc.
+View(arraged_flights)
 
-flights |>
-  arrange(desc(dep_delay))
+arranged_flights_2 = flights |>
+  arrange(sched_dep_time,arr_time,arr_delay)
+View(arranged_flights_2)
+
+arranged_flights_3 = flights |>
+  arrange(desc(dep_delay),arr_delay,carrier)
+
+View(arranged_flights_3)
+
+arranged_flights_4 = flights |>
+  arrange(dep_delay,desc(arr_delay),carrier)
+
+View(arranged_flights_4)
 
 # To remove duplicate rows containing specific values, distinct() is used
 flights |>
