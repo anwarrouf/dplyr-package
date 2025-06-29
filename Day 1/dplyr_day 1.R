@@ -64,11 +64,20 @@ View(arranged_flights_4)
 # To remove duplicate rows containing specific values, distinct() is used
 flights |>
   distinct()
+# দুইটা row এর সব value একই হলে একটি row বাদ দিয়ে দেয়া হবে।
+
 # In case to use two variables such as finding all unique origin and destination pairs
 flights |>
   distinct(origin,dest)
+# উপরের লাইনে যেহেতু দুইটা column দেয়া হয়েছে, তাই by default এই দুই column যে value গুলো একই তা বাদ যাবে। এর সাথে সাথে by default অন্য column গুলো দেখাবে না
 # if we want to keep the other columns when filtering for unique rows, then
-
 flights |>
   distinct(origin,dest,.keep_all = T)
-  
+
+# Exercise
+ exercise_1 = flights |>
+   filter(arr_delay >= 120)|>
+   filter(dest == "IAH" | dest == "HOU")|>
+   filter(carrier == "AA" | carrier == "UA" | carrier == "DL")|>
+   filter(month == 7 | month == 8 | month == 9)
+ 
