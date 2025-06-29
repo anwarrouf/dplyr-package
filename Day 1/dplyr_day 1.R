@@ -25,6 +25,7 @@ glimpse(flights)
 
 # Use of filter() - using one condition
 
+# choosing the flights which dep_delay was more than 120. No other column value will be changed
 flights |>
   filter(dep_delay > 120)
 
@@ -40,6 +41,7 @@ flights |>
 arraged_flights = flights |>
   arrange(year,month,day,dep_time)
 # In the above arrange () function, we set four column conditions
+# প্রথমে first rowকে ascendind order এ সাজানো হবে। তারপর second column এ একই কাজ করবে। এভাবে চলতে থাকবে যতগুলো column উল্লেখ করা হয়েছে।
 # If you provide more than one column name, each additional column will be used to break ties in the values of the preceding columns.
 # For example, the following code sorts by the departure time, which is spread over four columns.
 # We get the earliest years first, then within a year, the earliest months, etc.
@@ -69,25 +71,4 @@ flights |>
 
 flights |>
   distinct(origin,dest,.keep_all = T)
-
-flights |>
-  filter(arr_delay >= 120 & dep_delay == 0) |>
-  filter(dest == "IAH" | dest == "HOU") |>
-  filter(carrier == "UA" | carrier == "AA" | carrier == "DL" ) |>
-  filter(month == 7 | month == 8 | month ==9)
-  
-library(dplyr)
-carData = mtcars
-carData |> relocate(qsec,.before=cyl)
-carData |> relocate(cyl, .after = mpg)
-carData |> mutate(kmpg = mpg * 3) |>
-  relocate(kmpg, .after = mpg)
-New_data = carData |> select(cyl, disp, hp)
-library(ggplot2)
-New_data$cyl = as.factor(New_data$cyl)
-ggplot(New_data,aes(x = hp, y = disp, size = cyl))+
-  geom_point()+
-  geom_smooth(method = lm, se = F)+
-  theme_classic()
-
   
