@@ -60,3 +60,18 @@ flights |>
   filter(carrier == "UA" | carrier == "AA" | carrier == "DL" ) |>
   filter(month == 7 | month == 8 | month ==9)
   
+library(dplyr)
+carData = mtcars
+carData |> relocate(qsec,.before=cyl)
+carData |> relocate(cyl, .after = mpg)
+carData |> mutate(kmpg = mpg * 3) |>
+  relocate(kmpg, .after = mpg)
+New_data = carData |> select(cyl, disp, hp)
+library(ggplot2)
+New_data$cyl = as.factor(New_data$cyl)
+ggplot(New_data,aes(x = hp, y = disp, size = cyl))+
+  geom_point()+
+  geom_smooth(method = lm, se = F)+
+  theme_classic()
+
+  
